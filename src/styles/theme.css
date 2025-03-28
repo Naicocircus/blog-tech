@@ -1,0 +1,648 @@
+:root {
+  /* Main color palette */
+  --primary-color: #00b4d8; /* Bright cyan blue */
+  --secondary-color: #7209b7; /* Deep purple */
+  --accent-color: #4cc9f0; /* Light blue */
+  
+  /* Background and text colors */
+  --bg-dark: #121212;
+  --bg-medium: #1e1e1e;
+  --bg-light: #2d2d2d;
+  --text-light: #f8f9fa;
+  --text-muted: #adb5bd;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  --gradient-secondary: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+  
+  /* Shadows */
+  --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Global styles */
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Navbar styling */
+.navbar {
+  background: var(--bg-medium) !important;
+  box-shadow: var(--box-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  background: var(--gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+  text-shadow: none;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.brand-logo {
+  color: var(--primary-color) !important;
+  text-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+.brand-logo::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.brand-logo:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-link {
+  color: var(--text-light) !important;
+  position: relative;
+  padding: 0.5rem 1rem;
+  margin: 0 0.2rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background: var(--gradient-primary);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 80%;
+  left: 10%;
+}
+
+/* Card styling */
+.card {
+  background-color: var(--bg-medium);
+  border: none;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+}
+
+.card-text {
+  color: var(--text-light) !important;
+}
+
+.text-muted {
+  color: #adb5bd !important;
+}
+
+.card-img-top {
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.card-footer {
+  background-color: var(--bg-medium) !important;
+  border-top: 1px solid var(--bg-light);
+}
+
+/* Card image overlay gradient */
+.card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img-overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .card-img-overlay-gradient {
+  opacity: 1;
+}
+
+/* Button styling */
+.btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease;
+  color: var(--text-light) !important;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 180, 216, 0.4);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color);
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: var(--bg-dark) !important;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: var(--gradient-secondary);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(114, 9, 183, 0.4);
+}
+
+/* Glowing button effect */
+.btn-glow {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  color: white !important;
+  font-weight: 500;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(76, 201, 240, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.btn-glow:hover::after {
+  opacity: 1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(0.95); }
+}
+
+.btn-hover-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-hover-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+}
+
+.btn-hover-effect:hover::before {
+  left: 100%;
+}
+
+/* Form styling */
+.form-control, .form-select {
+  background-color: var(--bg-light);
+  border: 1px solid var(--bg-medium);
+  color: var(--text-light);
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25rem rgba(0, 180, 216, 0.25);
+}
+
+/* Badge styling */
+.badge {
+  padding: 0.5em 0.8em;
+  border-radius: 50rem;
+  font-weight: 500;
+}
+
+.badge.bg-primary {
+  background: var(--gradient-primary) !important;
+}
+
+.badge.bg-secondary {
+  background: var(--gradient-secondary) !important;
+}
+
+/* Footer styling */
+footer {
+  background-color: var(--bg-medium) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+footer a {
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--primary-color) !important;
+  text-decoration: none;
+}
+
+/* Jumbotron styling */
+.jumbotron {
+  background: var(--bg-medium) !important;
+  border-radius: 15px !important;
+  box-shadow: var(--box-shadow);
+  position: relative;
+  overflow: hidden;
+  color: var(--text-light) !important;
+}
+
+.jumbotron::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--gradient-primary);
+}
+
+/* Table styling */
+.table {
+  color: var(--text-light);
+}
+
+.table thead th {
+  border-bottom: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(0, 180, 216, 0.1);
+}
+
+/* Tab styling */
+.nav-tabs {
+  border-bottom: 1px solid var(--bg-light);
+}
+
+.nav-tabs .nav-link {
+  color: var(--text-muted) !important;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--primary-color) !important;
+  background-color: transparent;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+  color: var(--text-light) !important;
+  border-bottom: 2px solid var(--text-muted);
+}
+
+/* Animation for page transitions */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-medium);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-light);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Alert styling */
+.alert-success {
+  background-color: rgba(0, 180, 216, 0.2);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.alert-danger {
+  background-color: rgba(220, 53, 69, 0.2);
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+/* Text gradient */
+.text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+/* Animated circles for tech background */
+.tech-circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  right: -50px;
+  background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+  animation: float 15s infinite ease-in-out;
+}
+
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -100px;
+  left: 10%;
+  background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+  animation: float 20s infinite ease-in-out reverse;
+}
+
+.circle-3 {
+  width: 150px;
+  height: 150px;
+  top: 30%;
+  left: 40%;
+  background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+  animation: float 25s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10px, 10px) rotate(5deg); }
+  50% { transform: translate(0, 20px) rotate(0deg); }
+  75% { transform: translate(-10px, 10px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Circuit board pattern background */
+.home-page {
+  position: relative;
+}
+
+/* Links */
+a {
+  color: var(--primary-color) !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-color) !important;
+}
+
+/* Stile per il testo nei post */
+.home-page h1, .home-page h2, .home-page h3, .home-page h4, .home-page h5, .home-page h6 {
+  color: var(--text-light) !important;
+}
+
+.home-page p {
+  color: var(--text-light) !important;
+}
+
+/* Stile per la pagina dei singoli articoli */
+.post-detail-page h1, .post-detail-page h2, .post-detail-page h3, .post-detail-page h4, .post-detail-page h5, .post-detail-page h6 {
+  color: var(--text-light) !important;
+}
+
+.post-detail-page p, .post-detail-page div {
+  color: var(--text-light) !important;
+}
+
+.post-detail-page .post-content {
+  color: var(--text-light) !important;
+}
+
+.post-detail-page .post-meta {
+  color: var(--text-muted) !important;
+}
+
+.post-detail-page .comment-section {
+  color: var(--text-light) !important;
+}
+
+.post-detail-page .comment-author {
+  color: var(--primary-color) !important;
+  font-weight: 600;
+}
+
+.post-detail-page .comment-date {
+  color: var(--text-muted) !important;
+  font-size: 0.9rem;
+}
+
+.post-detail-page .comment-text {
+  color: var(--text-light) !important;
+}
+
+/* Stile generale per tutte le pagine */
+.container h1, .container h2, .container h3, .container h4, .container h5, .container h6 {
+  color: var(--text-light) !important;
+}
+
+.container p, .container div, .container span {
+  color: var(--text-light) !important;
+}
+
+/* Eccezioni per elementi specifici */
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.card-title {
+  color: var(--primary-color) !important;
+}
+
+.badge {
+  color: var(--text-light) !important;
+}
+
+/* Stile per la pagina del blog */
+.blog-page h1, .blog-page h2, .blog-page h3, .blog-page h4, .blog-page h5, .blog-page h6 {
+  color: var(--text-light) !important;
+}
+
+.blog-page p, .blog-page div {
+  color: var(--text-light) !important;
+}
+
+.blog-page .card-title {
+  color: var(--primary-color) !important;
+}
+
+.blog-page .card-text {
+  color: var(--text-light) !important;
+}
+
+/* Stile per i form in tutte le pagine */
+.form-control, .form-select {
+  color: var(--text-light) !important;
+}
+
+.form-control::placeholder, .form-select::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+/* Stile per la pagina di creazione post */
+.create-post-page h1, .create-post-page h2, .create-post-page h3, .create-post-page h4, .create-post-page h5, .create-post-page h6 {
+  color: var(--text-light) !important;
+}
+
+.create-post-page p, .create-post-page div, .create-post-page label {
+  color: var(--text-light) !important;
+}
+
+.create-post-page .form-label {
+  color: var(--text-light) !important;
+  font-weight: 500;
+}
+
+/* Stile per la pagina di profilo */
+.profile-page h1, .profile-page h2, .profile-page h3, .profile-page h4, .profile-page h5, .profile-page h6 {
+  color: var(--text-light) !important;
+}
+
+.profile-page p, .profile-page div, .profile-page span {
+  color: var(--text-light) !important;
+}
+
+/* Stile per le pagine di login e registrazione */
+.auth-page h1, .auth-page h2, .auth-page h3, .auth-page h4, .auth-page h5, .auth-page h6 {
+  color: var(--text-light) !important;
+}
+
+.auth-page p, .auth-page div, .auth-page label {
+  color: var(--text-light) !important;
+}
+
+/* Stile per la pagina About */
+.about-page h1, .about-page h2, .about-page h3, .about-page h4, .about-page h5, .about-page h6 {
+  color: var(--text-light) !important;
+}
+
+.about-page p, .about-page div, .about-page li {
+  color: var(--text-light) !important;
+}
+
+.about-page .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-page .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Stile per la pagina Contact */
+.contact-page h1, .contact-page h2, .contact-page h3, .contact-page h4, .contact-page h5, .contact-page h6 {
+  color: var(--text-light) !important;
+}
+
+.contact-page p, .contact-page div, .contact-page label {
+  color: var(--text-light) !important;
+}
+
+.contact-page .form-label {
+  color: var(--text-light) !important;
+  font-weight: 500;
+}
+
+.contact-page .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-page .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}

@@ -1,0 +1,83 @@
+.share-buttons {
+  margin: 15px 0;
+}
+
+.share-buttons .btn {
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.share-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.share-buttons .btn:not(:last-child) {
+  margin-right: 5px;
+}
+
+.share-dropdown-menu {
+  min-width: auto;
+}
+
+.share-dropdown-menu .dropdown-item {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.share-dropdown-menu .dropdown-item svg {
+  margin-right: 8px;
+}
+
+/* Colori dei social media */
+.btn-facebook {
+  background-color: #3b5998;
+  border-color: #3b5998;
+  color: white;
+}
+
+.btn-twitter {
+  background-color: #1da1f2;
+  border-color: #1da1f2;
+  color: white;
+}
+
+.btn-linkedin {
+  background-color: #0077b5;
+  border-color: #0077b5;
+  color: white;
+}
+
+.btn-whatsapp {
+  background-color: #25d366;
+  border-color: #25d366;
+  color: white;
+}
+
+@media (max-width: 576px) {
+  .share-buttons .btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Animazione per il pulsante di copia */
+.copy-link-btn .copied-indicator {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copy-link-btn .copied-indicator.visible {
+  opacity: 1;
+} 
