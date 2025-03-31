@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://localhost:5052/api';
+export const API_BASE_URL = 'https://blog-tech-be.onrender.com/api';
 
 // Per debug: stampa l'URL di base all'avvio dell'applicazione
 console.log('API base URL:', API_BASE_URL);
