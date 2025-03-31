@@ -1,3 +1,12 @@
+Link alla repo del Back End
+
+https://github.com/Naicocircus/blog-tech-be.git
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
