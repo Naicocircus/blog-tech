@@ -2,6 +2,10 @@ Link alla repo del Back End
 
 https://github.com/Naicocircus/blog-tech-be.git
 
+Link al sito online 
+
+https://blog-tech-eight.vercel.app
+
 
 
 
