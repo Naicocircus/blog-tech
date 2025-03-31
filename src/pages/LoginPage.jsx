@@ -54,7 +54,7 @@ const LoginPage = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:5052/api/auth/google';
+    window.location.href = 'https://blog-tech-be.onrender.com/api/auth/google';
   };
 
   return (
