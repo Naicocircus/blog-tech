@@ -187,46 +187,70 @@ const ApiService = {
 
   createPost: async (postData) => {
     try {
-      console.log('API call createPost with data:', postData);
-      
-      let dataToSend;
-      if (postData instanceof FormData) {
-        dataToSend = postData;
-      } else {
-        dataToSend = new FormData();
-        Object.keys(postData).forEach(key => {
-          if (key === 'tags' && Array.isArray(postData[key])) {
-            dataToSend.append('tags', JSON.stringify(postData[key]));
-          } else if (key === 'image' && postData[key] instanceof File) {
-            dataToSend.append('image', postData[key]);
-          } else if (postData[key] !== null && postData[key] !== undefined) {
-            dataToSend.append(key, postData[key]);
-          }
-        });
-      }
-
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          ...getAuthHeader()
+        // Log iniziale dei dati ricevuti
+        console.log('[CreatePost] Tipo di postData:', typeof postData);
+        console.log('[CreatePost] postData contiene image?', 'image' in postData);
+        if (postData.image) {
+            console.log('[CreatePost] Tipo di image:', typeof postData.image);
+            console.log('[CreatePost] Image è un File?', postData.image instanceof File);
+            if (postData.image instanceof File) {
+                console.log('[CreatePost] Dettagli immagine:', {
+                    name: postData.image.name,
+                    size: postData.image.size,
+                    type: postData.image.type
+                });
+            }
         }
-      };
-      
-      const response = await api.post(API_ENDPOINTS.POSTS, dataToSend, config);
-      
-      console.log('API response from createPost:', response);
-      
-      return {
-        success: true,
-        data: response.data,
-        message: 'Post creato con successo'
-      };
+
+        const formData = new FormData();
+        
+        // Aggiungi tutti i campi al FormData con log
+        Object.keys(postData).forEach(key => {
+            if (key === 'tags' && Array.isArray(postData[key])) {
+                console.log(`[CreatePost] Aggiunta tags:`, postData[key]);
+                formData.append('tags', JSON.stringify(postData[key]));
+            } else if (key === 'image' && postData[key] instanceof File) {
+                console.log(`[CreatePost] Aggiunta immagine:`, postData[key].name);
+                formData.append('image', postData[key]);
+            } else {
+                console.log(`[CreatePost] Aggiunta ${key}:`, postData[key]);
+                formData.append(key, postData[key]);
+            }
+        });
+
+        // Verifica del contenuto del FormData
+        console.log('[CreatePost] Contenuto FormData:');
+        for (let pair of formData.entries()) {
+            console.log(pair[0], pair[1] instanceof File ? 
+                `File: ${pair[1].name} (${pair[1].size} bytes)` : pair[1]);
+        }
+
+        // Rimuovi Content-Type per permettere al browser di gestire il multipart boundary
+        delete api.defaults.headers['Content-Type'];
+        
+        const response = await api.post(API_ENDPOINTS.POSTS, formData, {
+            headers: {
+                ...getAuthHeader()
+            }
+        });
+        
+        console.log('[CreatePost] Risposta server:', response);
+        
+        // Ripristina Content-Type
+        api.defaults.headers['Content-Type'] = 'application/json';
+        
+        return {
+            success: true,
+            data: response.data,
+            message: 'Post creato con successo'
+        };
     } catch (error) {
-      console.error('API error in createPost:', error);
-      return {
-        success: false,
-        message: error.response?.data?.message || error.message || 'Errore durante la creazione del post'
-      };
+        console.error('[CreatePost] Errore completo:', error);
+        api.defaults.headers['Content-Type'] = 'application/json';
+        return {
+            success: false,
+            message: error.response?.data?.message || error.message || 'Errore durante la creazione del post'
+        };
     }
   },
 
