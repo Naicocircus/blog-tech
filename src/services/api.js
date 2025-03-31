@@ -546,21 +546,13 @@ const ApiService = {
     
     try {
       const response = await api.get(API_ENDPOINTS.GET_POST_SHARES(postId));
+      console.log('[API] Share stats retrieved successfully:', response);
       
-      if (response.status === 200) {
-        console.log('[API] Share stats retrieved successfully:', response.data);
-        return {
-          success: true,
-          message: 'Statistiche di condivisione recuperate con successo',
-          data: response.data
-        };
-      } else {
-        console.error('[API] Error getting share stats:', response.data);
-        return {
-          success: false,
-          message: response.data.message || 'Errore durante il recupero delle statistiche di condivisione'
-        };
-      }
+      return {
+        success: true,
+        message: 'Statistiche di condivisione recuperate con successo',
+        data: response
+      };
     } catch (error) {
       console.error('[API] Error getting share stats:', error);
       return {
